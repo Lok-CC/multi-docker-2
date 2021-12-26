@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t lokcc/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t lokcc94/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true lokcc/react-test npm test
+  - docker run -e CI=true lokcc94/react-test npm test
 
 after_success:
-  - docker build -t lokcc/multi-client ./client
-  - docker build -t lokcc/multi-nginx ./nginx
-  - docker build -t lokcc/multi-server ./server
-  - docker build -t lokcc/multi-worker ./worker
+  - docker build -t lokcc94/multi-client ./client
+  - docker build -t lokcc94/multi-nginx ./nginx
+  - docker build -t lokcc94/multi-server ./server
+  - docker build -t lokcc94/multi-worker ./worker
 
   # Need to log in to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take those images to Docker Hub
-  - docker push lokcc/multi-client
-  - docker push lokcc/multi-nginx
-  - docker push lokcc/multi-server
-  - docker push lokcc/multi-worker
+  - docker push lokcc94/multi-client
+  - docker push lokcc94/multi-nginx
+  - docker push lokcc94/multi-server
+  - docker push lokcc94/multi-worker
